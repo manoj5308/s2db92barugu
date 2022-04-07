@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+   p Rows = #{query.rows} and Columns = #{query.cols}
+    -
+        r = Number(query.rows)
+        c = Number(query.cols)
+    if !Number.isInteger(r)
+        p Rows are not accurate 
+    else if !Number.isInteger(c)  
+        p Columns are not accurate
+    else if r < 0 || r > 10
+        p rows are in range of 1 to 10
+    else if c < 0 || c > 10  
+        p columns are in range of 1 to 10
+    else 
+        table(id="t")
+            - for(let i=0;i<r;i++){
+                tr 
+                    -for(let j=i ;j<c+i;j++){
+                        td= j 
+
+                    -}
+            -}

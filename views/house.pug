@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1= title
+  div(class="container-fluid")
+        div(class="row")
+            -
+                var results = [
+                    {
+                        "Price":"$200",
+                        "area":"Maryville",
+                        "type":"2BHK"
+                    },
+                    {
+                        "Price":"$400",
+                        "area":"Maryville",
+                        "type":"1BHK"
+                    },
+                    {
+                       "Price":"$400",
+                        "area":"Maryville",
+                        "type":"3BHK"
+                    }
+                ]
+            each i,index in results 
+                div(class="col-sm-2" onclick=`buy(${index})`)  #{i.Price}  
+                div(class="col-sm-2" onclick=`buy(${index})`)  #{i.area}
+                div(class="col-sm-2" onclick=`buy(${index})`)  #{i.type}
+  script.
+    function buy(p)
+    {
+        alert(`You have purchased an item ${p+1}`);
+    }
