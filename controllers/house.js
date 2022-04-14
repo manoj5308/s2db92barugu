@@ -22,9 +22,25 @@ exports.house_detail = async function (req, res) {
     }
 };
 // Handle house create on POST.
-exports.house_create_post = function(req, res) {
- res.send('NOT IMPLEMENTED: house create POST');
-};
+exports.house_create_post = async function(req, res) {
+    console.log(req.body)
+    let document = new house();
+    // We are looking for a body, since POST does not have query parameters.
+    // Even though bodies can be in many different formats, we will be picky
+    // and require that it be a json object
+    // {"costume_type":"goat", "cost":12, "size":"large"}
+    document.house_name = req.body.house_name;
+    document.house_continent = req.body.house_continent;
+    document.house_populationranking = req.body.house_populationranking;
+    try{
+    let result = await document.save();
+    res.send(result);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+   };
 // Handle house delete form on DELETE.
 exports.house_delete = function(req, res) {
  res.send('NOT IMPLEMENTED: house delete DELETE ' + req.params.id);
@@ -37,9 +53,9 @@ exports.house_update_put = async function (req, res) {
         let toUpdate = await house.findById(req.params.id)
         // Do updates of properties
         if (req.body.house_type)
-            toUpdate.house_type = req.body.house_type;
-        if (req.body.cost) toUpdate.cost = req.body.house_continent;
-        if (req.body.size) toUpdate.size = req.body.house_populationranking;
+            toUpdate.house_price = req.body.house_price;
+        if (req.body.cost) toUpdate.house_area = req.body.house_area;
+        if (req.body.size) toUpdate.house_type = req.body.house_type;
         let result = await toUpdate.save();
         console.log("Sucess " + result)
         res.send(result)
@@ -49,3 +65,16 @@ exports.house_update_put = async function (req, res) {
     failed`);
     }
 };
+
+// VIEWS
+// Handle a show all view
+exports.house_view_all_Page = async function(req, res) {
+    try{
+    thehouses = await house.find();
+    res.render('house', { title: 'house Search Results', results: thehouses });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+   };
