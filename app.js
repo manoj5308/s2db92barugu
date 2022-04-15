@@ -4,6 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require("mongoose");
+var app = express();
+//Get the default connection 
+var db = mongoose.connection; 
+//Bind connection to error event  
+db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
+db.once("open", function(){ 
+console.log("Connection to DB succeeded")}); 
+
+const connectionString =  process.env.MONGO_CON;
+console.log(connectionString);
+mongoose.connect(connectionString,{useNewUrlParser: true,useUnifiedTopology: true});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -14,25 +25,11 @@ var resourceRouter = require('./routes/resource');
 var house = require("./models/house");
 
 
-
-const connectionString =  process.env.MONGO_CON;
-console.log(connectionString);
-mongoose.connect(connectionString,{useNewUrlParser: true,useUnifiedTopology: true});
-
-
-
-
-
-var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use('/house',houseRouter);
-app.use('/addmods',addmodRouter);
-app.use('/selector',selectorRouter);
-app.use('/resource',resourceRouter);
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,6 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/house',houseRouter);
+app.use('/addmods',addmodRouter);
+app.use('/selector',selectorRouter);
+app.use('/resource',resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -57,10 +58,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-module.exports = app;
-//Get the default connection 
-var db = mongoose.connection; 
 
 // We can seed the collection if needed on server start 
 async function recreateDB(){ 
@@ -89,15 +86,9 @@ async function recreateDB(){
 
  let reseed = true;
  if (reseed) { recreateDB();}
- 
-//Bind connection to error event  
-db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
-db.once("open", function(){ 
-console.log("Connection to DB succeeded")}); 
 
-//Get the default connection
-var db = mongoose.connection;
-//Bind connection to error event
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once("open", function(){console.log("Connection to DB succeeded")});
+module.exports = app;
+
+ 
+
 
