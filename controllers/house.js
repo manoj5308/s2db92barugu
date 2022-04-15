@@ -66,6 +66,18 @@ exports.house_update_put = async function (req, res) {
     }
 };
 
+// List of all Costumes 
+exports.house_list = async function(req, res) { 
+    try{ 
+        thehouses = await house.find(); 
+        res.send(thehouses); 
+    } 
+    catch(err){ 
+        res.status(500); 
+        res.send(`{"error": ${err}}`); 
+    }   
+}; 
+
 // VIEWS
 // Handle a show all view
 exports.house_view_all_Page = async function(req, res) {
