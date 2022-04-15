@@ -15,10 +15,9 @@ router.post('/houses', house_controller.house_create_post);
 // DELETE request to delete house.
 router.delete('/house/:id', house_controller.house_delete);
 // PUT request to update house.
-router.put('/house/:id',
-house_controller.house_update_put);
+router.put('/house/:id', house_controller.house_update_put);
 // GET request for one house.
-router.get('/resource/houses/:id', house_controller.house_detail);
+router.get('/house/:id', house_controller.house_detail);
 // GET request for list of all house items.
-router.get('/houses', house_controller.house_list);
+router.get('/house', house_controller.house_list);
 module.exports = router;

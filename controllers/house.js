@@ -3,7 +3,7 @@ var house = require('../models/house');
 exports.house_list = async function(req, res) {
     try{
         thehouses = await house.find();
-        res.send(thehouses);
+        res.send(thehouse);
     }
     catch(err){
         res.status(500);
@@ -70,7 +70,7 @@ exports.house_update_put = async function (req, res) {
 exports.house_list = async function(req, res) { 
     try{ 
         thehouses = await house.find(); 
-        res.send(thehouses); 
+        res.send(thehouse); 
     } 
     catch(err){ 
         res.status(500); 
@@ -83,7 +83,7 @@ exports.house_list = async function(req, res) {
 exports.house_view_all_Page = async function(req, res) {
     try{
     thehouses = await house.find();
-    res.render('house', { title: 'house Search Results', results: thehouses });
+    res.render('house', { title: 'house Search Results', results: thehouse });
     }
     catch(err){
     res.status(500);
