@@ -29,9 +29,9 @@ exports.house_create_post = async function(req, res) {
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
     // {"costume_type":"goat", "cost":12, "size":"large"}
-    document.house_name = req.body.house_name;
-    document.house_continent = req.body.house_continent;
-    document.house_populationranking = req.body.house_populationranking;
+    document.house_price = req.body.house_price;
+    document.house_area = req.body.house_area;
+    document.house_type = req.body.house_type;
     try{
     let result = await document.save();
     res.send(result);
@@ -52,10 +52,10 @@ exports.house_update_put = async function (req, res) {
     try {
         let toUpdate = await house.findById(req.params.id)
         // Do updates of properties
-        if (req.body.house_type)
+        if (req.body.house_price)
             toUpdate.house_price = req.body.house_price;
-        if (req.body.cost) toUpdate.house_area = req.body.house_area;
-        if (req.body.size) toUpdate.house_type = req.body.house_type;
+        if (req.body.house_area) toUpdate.house_area = req.body.house_area;
+        if (req.body.house_type) toUpdate.house_type = req.body.house_type;
         let result = await toUpdate.save();
         console.log("Sucess " + result)
         res.send(result)
