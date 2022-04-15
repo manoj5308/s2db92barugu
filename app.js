@@ -67,19 +67,19 @@ async function recreateDB(){
   // Delete everything 
   await house.deleteMany(); 
 
-  let instance1 = new house({house_price:"$50000000", house_area:'1500', house_type:"1bhk"});
+  let instance1 = new house({house_price:"twomillions", house_area:"fifteenhundredsqaurefeet", house_type:"onebhk"});
   instance1.save( function(err,doc) {
   if(err) return console.error(err);
   console.log("First object saved")
   });
  
-  let instance2 = new house({house_price:"$100000000", house_area:'2000', house_type:"2bhk"});
+  let instance2 = new house({house_price:"fourmillions", house_area:"twothousandsqaurefeet", house_type:"twobhk"});
   instance2.save( function(err,doc) {
   if(err) return console.error(err);
   console.log("Second object saved")
   });
  
-  let instance3 = new house({house_price:"$150000000", house_area:'2500', house_type:"3bhk"});
+  let instance3 = new house({house_price:"fivemillions", house_area:"twothousandfivehundredsqaurefeet", house_type:"threebhk"});
   instance3.save( function(err,doc) {
   if(err) return console.error(err);
   console.log("Third object saved")
