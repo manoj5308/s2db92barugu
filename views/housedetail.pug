@@ -1,0 +1,23 @@
+extends layout
+block content
+ h1= title
+ if(toShow == null)
+    h2 No instances to details 
+ else
+ - let houseid = toShow._id
+ - let houseprice = toShow.house_price
+ - let sarea = toShow.house_area
+ - let stype= toShow.house_type
+ div
+    div.row
+        div(class='houseAttr mr-3') House ID is:
+        div #{houseid}
+    div.row
+        div(class='houseAttr mr-3') House Priceis:
+        div(class='toolHAttr') #{houseprice}
+    div.row
+        div(class='houseAttr mr-3') Area  is:
+        div(class='toolHAttr')  #{sarea}
+    div.row
+        div(class='houseAttr mr-3') Type  is:
+        div(class='toolHAttr') #{stype}

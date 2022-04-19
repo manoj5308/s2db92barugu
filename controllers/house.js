@@ -80,3 +80,64 @@ exports.house_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
    };
+
+   exports.house_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await house.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
+
+   exports.house_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await house.findById( req.query.id)
+    res.render('housedetail',{ title: 'House Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+   exports.house_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('housecreate', { title: 'House Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+   exports.house_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await house.findById(req.query.id)
+    res.render('houseupdate', { title: 'House Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+   exports.house_delete_Page = async function(req, res) { 
+    console.log("Delete view for id "  + req.query.id) 
+    try{ 
+        result = await house.findById(req.query.id) 
+        res.render('housedelete', { title: 'House Delete', toShow: 
+result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+

@@ -1,0 +1,45 @@
+extends layout 
+ 
+block content 
+  h1= title 
+  if(toShow == null)
+    h2 No instances to delete
+  else 
+  - let houseid = toShow._id
+  - let houseprice = toShow.house_price
+  - let sarea = toShow.house_area
+  - let stype= toShow.house_type
+   
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{costumeid} 
+  - let actionid = "/resource/house/"+houseid 
+  form(id='CostumeForm', action= actionid, method="PUT") 
+    div.form-group 
+        label.houseAttr(for='house_price') House Price
+        input#house_price(type='text', name='house_price', value= houseprice ) 
+    div.form-group 
+        label.houseAttr(for='house_area') House Area  
+        input#house_area(type='text', name='house_area', value= sarea) 
+    div.form-group 
+        label.houseAttr(for='house_type') House Type
+        input#house_type(type='text', name='house_type', value= stype ) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['CostumeForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    }); 
