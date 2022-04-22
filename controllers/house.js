@@ -73,7 +73,7 @@ exports.house_list = async function(req, res) {
 exports.house_view_all_Page = async function(req, res) {
     try{
     thehouses = await house.find();
-    res.render('house', { title: 'house Search Results', results: thehouse });
+    res.render('house', { title: 'house Search Results', results: thehouses });
     }
     catch(err){
     res.status(500);

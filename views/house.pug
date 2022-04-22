@@ -3,23 +3,19 @@ extends layout
 block content
   h1= title
   - let items = results
-   div(class = "container-fluid")
-    div(class = "row m-1")
-     each item in items  
-      - let destination = `dispatch(\"/House/update?id=${item._id}\")`
-      //- let destination1 = `dispatch(\"/Season/create\")`
-      //- let destination2 = `dispatch(\"/Season/detail?id=${item._id}\")`
-      //- let destination3 = `dispatch(\"/Season/delete?id=${item._id}\")`
-      div(class="row-sm-2", class="m-1") House_name: #{item.house_price}(#{item.house_area}) is #{item.house_type}  
-        button.btn( class="btn-primary ml-1", onclick= destination, style = "margin:8px;") Update
-        //-button.btn( class="btn-primary ml-1", onclick= destination1, style = "margin:8px;" ) Create
-        //-button.btn( class="btn-primary ml-1", onclick= destination2, style = "margin:8px;" ) Detail
-        //-button.btn( class="btn-primary ml-1", onclick= destination3, style = "margin:8px;" ) Delete
+  div(class="container-fluid")
+        div(class="row m-1")
+             each item in items
+              - let destination = `dispatch(\"/resource/update/?id=${item._id}\")`
+              div(class="row-sm-2", class = "m1-1") House: #{item.house_price}(#{item.house_area}) is #{item.house_type} 
+               button.btn(class="btn-primary m1-1", onclick=destination) Update
   script.
-    function buy(itemNo){
-        alert(`You purchased item ${itemNo+1}`)
+    function buy(p)
+    {
+        alert(`You have purchased an item ${p+1}`);
     }
-  script. 
-    function dispatch(path){ 
-        window.location.href=path 
+  script.
+    function dispatch(path){
+        console.log(path);
+        window.location.href=path
     }
