@@ -31,10 +31,7 @@ exports.house_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
    };
-// Handle house delete form on DELETE.
-exports.house_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: house delete DELETE ' + req.params.id);
-};
+
 // Handle house update form on PUT.
 exports.house_update_put = async function(req, res) { 
     console.log(`update on id ${req.params.id} with body 

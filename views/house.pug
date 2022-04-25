@@ -3,12 +3,18 @@ extends layout
 block content
   h1= title
   - let items = results
+  - let destination1 = `dispatch(\"/house/create\")`
+  button.btn(class="btn-primary m1-1", onclick=destination1) Create
   div(class="container-fluid")
         div(class="row m-1")
              each item in items
               - let destination = `dispatch(\"/house/update/?id=${item._id}\")`
+              - let destination2 = `dispatch(\"/house/detail/?id=${item._id}\")`
+              - let destination3 = `dispatch(\"/house/delete/?id=${item._id}\")`
               div(class="row-sm-2", class = "m1-1") House: #{item.house_price}(#{item.house_area}) is #{item.house_type} 
                button.btn(class="btn-primary m1-1", onclick=destination) Update
+               button.btn(class="btn-primary m1-1", onclick=destination2) Detail
+               button.btn(class="btn-primary m1-1", onclick=destination3) Delete
   script.
     function buy(p)
     {
