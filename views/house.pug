@@ -6,7 +6,7 @@ block content
   div(class="container-fluid")
         div(class="row m-1")
              each item in items
-              - let destination = `dispatch(\"/resource/update/?id=${item._id}\")`
+              - let destination = `dispatch(\"/house/update/?id=${item._id}\")`
               div(class="row-sm-2", class = "m1-1") House: #{item.house_price}(#{item.house_area}) is #{item.house_type} 
                button.btn(class="btn-primary m1-1", onclick=destination) Update
   script.

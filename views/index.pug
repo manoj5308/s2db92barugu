@@ -1,18 +1,12 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
-  button(type='button' class='btn btn-primary' onclick='moreClaps()') Press Me 
-  br
-  br
-  div(id ="target") Clap for me
-  script. 
-    let clap_count= 0;
-    function moreClaps(){
-    clap_count = clap_count+2;
-    document.getElementById("target").innerHTML =  `Value of clap count now is : ${clap_count}`;
-    console.log(clap_count)
-    }
-  br
-  br
+extends layout 
+ 
+block content 
+  if (!user) 
+    a(href="/login") Login 
+    br 
+    a(href="/register") Register 
+  if (user) 
+    p You are currently logged in as #{user.username} 
+    a(href="/house") Take me to costumes 
+    br 
+    a(href="/logout") Logout

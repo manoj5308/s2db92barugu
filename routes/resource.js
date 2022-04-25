@@ -10,10 +10,6 @@ var house_controller = require('../controllers/house');
 // GET resources base.
 router.get('/', api_controller.api);
 
-router.get('/detail', house_controller.house_view_one_Page);
-router.get('/create', house_controller.house_create_Page);
-router.get('/update', house_controller.house_update_Page);
-router.get('/delete', house_controller.house_delete_Page); 
 /// house ROUTES ///
 // POST request for creating a house.
 router.post('/houses', house_controller.house_create_post);
